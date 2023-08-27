@@ -66,7 +66,9 @@ UINT {
 
 ```
 Header {
-    magic: UINT(::bit(3), )
+    magic: UINT[bits(5)] {
+        OFFSET(10)
+    }
 }
 ```
 确认 Encode 所需要具备的属性:
@@ -77,5 +79,10 @@ Header {
 
 确认 member 所需要的属性, member 的属性一般用于覆盖 Encode 的属性 ：
 
-+ permission
++ size
 + order
++ permission
++ offset
+
+所有的格式应当精简，避免过多属性字样，比如 OFFSET(0x100)。
+应当使用符号代替如 `#0x100` 表示偏移，`0..=4` 表示 bit0 到 bit4 包含。`[0, 4]` 表示 byte0 到 byte4 包含。
